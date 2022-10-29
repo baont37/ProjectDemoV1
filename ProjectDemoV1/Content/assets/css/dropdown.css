@@ -1,0 +1,125 @@
+/* body {
+    padding: 2%;
+    text-align: center;
+}
+
+#slideshow {
+    overflow: hidden;
+    height: 100%;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.slide-wrapper {
+    width: 5000px;
+    height: 100%;
+    animation: slide 20s ease infinite;
+}
+
+.slide {
+    float: left;
+    height: 100%;
+    width: 998px;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 30px;
+}   
+
+
+@keyframes slide {
+    10% {margin-left: 0px;}
+    20% {margin-left: -1000px;}
+    30% {margin-left: -1000px;}
+    50% {margin-left: -2000px;}
+    60% {margin-left: -2000px;}
+    80%{margin-left: -3000px;}
+    90%{margin-left: -3000px;}
+} */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background-color: #0487d9;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .header_logo{
+    text-decoration: none;
+    padding-left: 15px;
+    width: 20%;
+    color: white;
+
+    display: flex;
+    align-items: center;
+}
+
+.header img{
+    width: 40px;
+    margin: 10px;
+}
+
+.header h4{
+    width: 90%;
+    padding-left: 15px;
+}
+/* -------------------------- */
+.dropdownn {
+    width: 7.5%;
+    margin-right: 25px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+    .dropdownn button {
+        padding: 1px 20px 4px 20px;
+        border-radius: 60px;
+        background-color: white;
+        border: none;
+        font-weight: bold;
+    }
+/* -------------------------- */
+.dropdown_list {
+    width: 13%;
+    position: absolute;
+    top: 42px;
+    right: 25px;
+    padding: 20px 0px 10px 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    display: none;
+}
+
+.dropdown_list {
+}
+
+    .dropdown_list .dropdown_list_item {
+        list-style: none;
+        margin-bottom: 10px;
+        padding: 5px 8px;
+        border-radius: 8px;
+    }
+
+        .dropdown_list .dropdown_list_item:hover {
+            font-weight: bold;
+        }
+
+.dropdownn .dropdown_list_item a {
+    text-decoration: none;
+    color: black;
+}
+
+.dropdownn:hover .dropdown_list {
+    display: block;
+}

@@ -1,0 +1,1041 @@
+﻿
+@{
+    ViewBag.Title = "Statistic";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@Styles.Render("~/Content/assets/css/style.css")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<div class="content">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="Stylesheet" href="~/Content/DashBoardStyle.css" />
+
+    <h1>Thống kê thành viên</h1>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-1">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size text-padding">Tổng số thành viên &emsp; &emsp;</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity"><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.sumMember</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-2">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số thành viên đăng ký trong ngày</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity"><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countMemberInDay</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-3">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số thành viên đăng ký trong tháng</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countMemberInMonth</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số thành viên đăng ký trong năm</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countMemberInYear</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <figure class="highcharts-figure">
+            <div id="MemberChartPerDay"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="MemberChartPerMonth"></div>
+        </figure>
+    </div>
+    <h1>Thống kê bài thi</h1>
+    <div class="container-fluid mt-3">
+        <div class="Row">
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-1">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số bài thi</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.sumTest</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-2">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số bài thi tạo trong ngày</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countTestInDay</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-3">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số bài thi tạo trong tháng</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countTestInMonth</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="card gradient-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-white text-size">Tổng số bài thi tạo trong năm</h3>
+                        <div class="d-inline-block">
+                            <span class="icon-size icon-opacity "><i class="glyphicon glyphicon-user"></i></span>
+                        </div>
+                        <h2 class="float-right text-white number-size number-padding">@ViewBag.countTestInYear</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-3">
+        <figure class="highcharts-figure">
+            <div id="TestChartPerDay"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="TestChartPerMonth"></div>
+        </figure>
+    </div>
+    <h1>Thống kê câu hỏi</h1>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <figure class="highcharts-figure">
+                    <div id="QuestionChart"></div>
+                </figure>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <figure class="highcharts-figure">
+                    <div id="QuestionChart2"></div>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <h1>Thống kê môn học</h1>
+    <div class="container-fluid mt-3">
+        <figure class="highcharts-figure">
+            <div id="SubjectChartByQuestion"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="SubjectChartByTest"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="SubjectTestChartPerDay"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="SubjectTestChartPerMonth"></div>
+        </figure>
+    </div>
+    @*    <h1>Thống kê trường học</h1>
+        <div class="container-fluid mt-3">
+            <figure class="highcharts-figure">
+                <div id="SchoolChartByMember"></div>
+            </figure>
+            <figure class="highcharts-figure">
+                <div id="SchoolChartByMemberPerMonth"></div>
+            </figure>
+        </div>*@
+    <h1>Thống kê điểm số</h1>
+    <div class="container-fluid mt-3">
+        @*        <figure class="highcharts-figure">
+                <div id="PointChartBySchool"></div>
+            </figure>*@
+        <figure class="highcharts-figure">
+            <div id="PointChartBySubject"></div>
+        </figure>
+    </div>
+    <script>
+    //Member chart Per Month
+    Highcharts.chart('MemberChartPerMonth', {
+
+        title: {
+            text: 'Số lượng người đăng ký theo tháng'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng người đăng ký'
+            }
+        },
+
+        xAxis: {
+            categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            accessibility: {
+                description: 'Tháng'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Người'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+
+        series: [{
+            name: 'Số lượng người đăng ký',
+            data: [@ViewBag.t1, @ViewBag.t2, @ViewBag.t3, @ViewBag.t4, @ViewBag.t5, @ViewBag.t6, @ViewBag.t7, @ViewBag.t8, @ViewBag.t9, @ViewBag.t10, @ViewBag.t11, @ViewBag.t12]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    //Member chart Per Day
+    Highcharts.chart('MemberChartPerDay', {
+
+        title: {
+            text: 'Số lượng người đăng ký theo ngày'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng người đăng ký'
+            }
+        },
+
+        xAxis: {
+            categories: ['ngày 1', 'ngày 2', 'ngày 3', 'ngày 4', 'ngày 5', 'ngày 6',
+                'ngày 7', 'ngày 8', 'ngày 9', 'ngày 10', 'ngày 11', 'ngày 12', 'ngày 13',
+                'ngày 14', 'ngày 15', 'ngày 16', 'ngày 17', 'ngày 18', 'ngày 19', 'ngày 20',
+                'ngày 21', 'ngày 22', 'ngày 23', 'ngày 24', 'ngày 25', 'ngày 26', 'ngày 27',
+                'ngày 28', 'ngày 29', 'ngày 30', 'ngày 31'],
+            accessibility: {
+                description: 'Ngày'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Người'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+
+        series: [{
+            name: 'Số lượng người đăng ký',
+            data: [@ViewBag.d1, @ViewBag.d2, @ViewBag.d3, @ViewBag.d4, @ViewBag.d5, @ViewBag.d6, @ViewBag.d7, @ViewBag.d8, @ViewBag.d9, @ViewBag.d10, @ViewBag.d11, @ViewBag.d12,
+            @ViewBag.d13, @ViewBag.d14, @ViewBag.d15, @ViewBag.d16, @ViewBag.d17, @ViewBag.d18, @ViewBag.d19, @ViewBag.d20, @ViewBag.d21, @ViewBag.d22, @ViewBag.d23, @ViewBag.d24,
+            @ViewBag.d25, @ViewBag.d26, @ViewBag.d27, @ViewBag.d28, @ViewBag.d29, @ViewBag.d30, @ViewBag.d31]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    //Test Chart Per Month
+        Highcharts.chart('TestChartPerMonth', {
+
+        title: {
+            text: 'Số lượng bài thi theo tháng'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng bài'
+            }
+        },
+
+        xAxis: {
+            categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            accessibility: {
+                description: 'Tháng'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Bài'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+
+        series: [{
+            name: 'Số lượng bài',
+            data: [@ViewBag.tt1, @ViewBag.tt2, @ViewBag.tt3, @ViewBag.tt4, @ViewBag.tt5, @ViewBag.tt6, @ViewBag.tt7, @ViewBag.tt8, @ViewBag.tt9, @ViewBag.tt10, @ViewBag.tt11, @ViewBag.tt12]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        });
+            //Test Chart Per Day
+        Highcharts.chart('TestChartPerDay', {
+
+        title: {
+            text: 'Số lượng bài thi theo ngày'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng bài'
+            }
+        },
+
+        xAxis: {
+                categories: ['ngày 1', 'ngày 2', 'ngày 3', 'ngày 4', 'ngày 5', 'ngày 6',
+                    'ngày 7', 'ngày 8', 'ngày 9', 'ngày 10', 'ngày 11', 'ngày 12', 'ngày 13',
+                    'ngày 14', 'ngày 15', 'ngày 16', 'ngày 17', 'ngày 18', 'ngày 19', 'ngày 20',
+                    'ngày 21', 'ngày 22', 'ngày 23', 'ngày 24', 'ngày 25', 'ngày 26', 'ngày 27',
+                    'ngày 28', 'ngày 29', 'ngày 30', 'ngày 31'],
+                accessibility: {
+                    description: 'Ngày'
+                }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Bài'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    radius: 4,
+                    lineColor: '#666666',
+                    lineWidth: 1
+                }
+            }
+        },
+
+        series: [{
+            name: 'Số lượng bài',
+            data: [@ViewBag.td1, @ViewBag.td2, @ViewBag.td3, @ViewBag.td4, @ViewBag.td5, @ViewBag.td6, @ViewBag.td7, @ViewBag.td8, @ViewBag.td9, @ViewBag.td10, @ViewBag.td11, @ViewBag.td12,
+            @ViewBag.td13, @ViewBag.td14, @ViewBag.td15, @ViewBag.td16, @ViewBag.td17, @ViewBag.td18, @ViewBag.td19, @ViewBag.td20, @ViewBag.td21, @ViewBag.td22, @ViewBag.td23, @ViewBag.td24,
+            @ViewBag.td25, @ViewBag.td26, @ViewBag.td27, @ViewBag.td28, @ViewBag.td29, @ViewBag.td30, @ViewBag.td31]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+//Question chart//
+    Highcharts.chart('QuestionChart', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Số lượng câu hỏi theo dạng bài'
+        },
+        subtitle: {
+            text: 'Tổng số câu hỏi: @ViewBag.sumQuestion'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br> {point.x} Câu'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f}%<br> {point.x} Câu'
+                }
+            }
+        },
+        series: [{
+            name: 'Số lượng',
+            colorByPoint: true,
+            data: [{
+                name: 'Câu hỏi cho bài học',
+                x: @ViewBag.countStudyQuestion,
+                y: @ViewBag.percentStudyQuestion,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Câu hỏi cho bài kiểm tra',
+                x: @ViewBag.countTestQuestion,
+                y: @ViewBag.percentTestQuestion
+            }]
+        }]
+    });
+    //Question chart 2
+    Highcharts.chart('QuestionChart2', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Số lượng câu hỏi theo độ khó'
+        },
+        subtitle: {
+            text: 'Tổng số câu hỏi: @ViewBag.sumQuestion'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br> {point.x} Câu'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f}%<br> {point.x} Câu'
+                }
+            }
+        },
+        series: [{
+            name: 'Số lượng',
+            colorByPoint: true,
+            data: [{
+                name: 'Câu hỏi dễ',
+                x: @ViewBag.countEasyQuestion,
+                y: @ViewBag.percentEasyQuestion,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Câu hỏi trung bình',
+                x: @ViewBag.countMediumQuestion,
+                y: @ViewBag.percentMediumQuestion
+            }, {
+                name: 'Câu hỏi khó',
+                x: @ViewBag.countHardQuestion,
+                y: @ViewBag.percentHardQuestion
+            }]
+        }]
+    });
+    //Subject Chart By Question
+    Highcharts.chart('SubjectChartByQuestion', {
+
+        chart: {
+            type: 'column'
+        },
+
+        title: {
+            text: 'Số lượng câu hỏi theo môn'
+        },
+
+        xAxis: {
+            categories: ['Toán', 'Lý', 'Hoá', 'Sinh', 'Sử', 'Địa', 'GDCD', "Anh Văn"]
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Số lượng câu'
+            }
+        },
+
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + " Câu" + '<br/>' +
+                    "Tổng cộng " + this.series.userOptions.stack + ": " + this.point.stackTotal + " Câu";
+            }
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+
+        series: [{
+            name: 'Câu dễ cho bài học',
+            data: [@ViewBag.sqh1t1, @ViewBag.sqe2t1, @ViewBag.sqe3t1, @ViewBag.sqe4t1, @ViewBag.sqe5t1, @ViewBag.sqe6t1, @ViewBag.sqe7t1, @ViewBag.sqe8t1],
+            stack: 'Câu cho bài học'
+        }, {
+            name: 'Câu trung bình cho bài học',
+            data: [@ViewBag.sqm1t1, @ViewBag.sqm2t1, @ViewBag.sqm3t1, @ViewBag.sqm4t1, @ViewBag.sqm5t1, @ViewBag.sqm6t1, @ViewBag.sqm7t1, @ViewBag.sqm8t1],
+            stack: 'Câu cho bài học'
+        }, {
+            name: 'Câu khó cho bài học',
+            data: [@ViewBag.sqh1t1, @ViewBag.sqh2t1, @ViewBag.sqh3t1, @ViewBag.sqh4t1, @ViewBag.sqh5t1, @ViewBag.sqh6t1, @ViewBag.sqh7t1, @ViewBag.sqh8t1],
+            stack: 'Câu cho bài học'
+        }, {
+            name: 'Câu dễ cho bài thi',
+            data: [@ViewBag.sqe1t2, @ViewBag.sqe2t2, @ViewBag.sqe3t2, @ViewBag.sqe4t2, @ViewBag.sqe5t2, @ViewBag.sqe6t2, @ViewBag.sqe7t2, @ViewBag.sqe8t2],
+            stack: 'Câu cho bài thi'
+        }, {
+            name: 'Câu trung bình cho bài thi',
+            data: [@ViewBag.sqm1t2, @ViewBag.sqm2t2, @ViewBag.sqm3t2, @ViewBag.sqm4t2, @ViewBag.sqm5t2, @ViewBag.sqm6t2, @ViewBag.sqm7t2, @ViewBag.sqm8t2],
+            stack: 'Câu cho bài thi'
+        }, {
+            name: 'Câu khó cho bài thi',
+            data: [@ViewBag.sqh1t2, @ViewBag.sqh2t2, @ViewBag.sqh3t2, @ViewBag.sqh4t2, @ViewBag.sqh5t2, @ViewBag.sqh6t2, @ViewBag.sqh7t2, @ViewBag.sqh8t2],
+            stack: 'Câu cho bài thi'
+        }]
+    });
+    //Subject Chart By Test
+        Highcharts.chart('SubjectChartByTest', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Số lượng bài thi theo môn'
+        },
+        xAxis: {
+            categories: [
+                'Toán',
+                'Hóa',
+                'Lý',
+                'Sinh',
+                'Anh',
+                'Địa',
+                'Sử',
+                'GDCD',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Số lượng bài'
+            }
+        },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}:&nbsp; </td>' +
+                    '<td style="padding:0"><b>{point.y:&nbsp; .f} Bài</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Bài thi',
+            data: [@ViewBag.stt1, @ViewBag.stt2, @ViewBag.stt3, @ViewBag.stt4, @ViewBag.stt5, @ViewBag.stt6, @ViewBag.stt7, @ViewBag.stt8]
+        }]
+        });
+    //Subject Test Chart Per Month
+    Highcharts.chart('SubjectTestChartPerMonth', {
+
+        title: {
+            text: 'Số lượng bài thi các môn theo tháng'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng bài'
+            }
+        },
+
+        xAxis: {
+            categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            accessibility: {
+                description: 'Tháng'
+            }
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Bài'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+            }
+        },
+
+        series: [{
+            name: 'Toán',
+            data: [@ViewBag.stt1m1, @ViewBag.stt1m2, @ViewBag.stt1m3, @ViewBag.stt1m4, @ViewBag.stt1m5, @ViewBag.stt1m6, @ViewBag.stt1m7, @ViewBag.stt1m8, @ViewBag.stt1m9, @ViewBag.stt1m10, @ViewBag.stt1m11, @ViewBag.stt1m12]
+        }, {
+            name: 'Hóa',
+            data: [@ViewBag.stt2m1, @ViewBag.stt2m2, @ViewBag.stt2m3, @ViewBag.stt2m4, @ViewBag.stt2m5, @ViewBag.stt2m6, @ViewBag.stt2m7, @ViewBag.stt2m8, @ViewBag.stt2m9, @ViewBag.stt2m10, @ViewBag.stt2m11, @ViewBag.stt2m12]
+        }, {
+            name: 'Lý',
+            data: [@ViewBag.stt3m1, @ViewBag.stt3m2, @ViewBag.stt3m3, @ViewBag.stt3m4, @ViewBag.stt3m5, @ViewBag.stt3m6, @ViewBag.stt3m7, @ViewBag.stt3m8, @ViewBag.stt3m9, @ViewBag.stt3m10, @ViewBag.stt3m11, @ViewBag.stt3m12]
+        }, {
+            name: 'Sinh',
+            data: [@ViewBag.stt4m1, @ViewBag.stt4m2, @ViewBag.stt4m3, @ViewBag.stt4m4, @ViewBag.stt4m5, @ViewBag.stt4m6, @ViewBag.stt4m7, @ViewBag.stt4m8, @ViewBag.stt4m9, @ViewBag.stt4m10, @ViewBag.stt4m11, @ViewBag.stt4m12]
+        }, {
+            name: 'Anh',
+            data: [@ViewBag.stt5m1, @ViewBag.stt5m2, @ViewBag.stt5m3, @ViewBag.stt5m4, @ViewBag.stt5m5, @ViewBag.stt5m6, @ViewBag.stt5m7, @ViewBag.stt5m8, @ViewBag.stt5m9, @ViewBag.stt5m10, @ViewBag.stt5m11, @ViewBag.stt5m12]
+        },  {
+            name: 'Địa',
+            data: [@ViewBag.stt6m1, @ViewBag.stt6m2, @ViewBag.stt6m3, @ViewBag.stt6m4, @ViewBag.stt6m5, @ViewBag.stt6m6, @ViewBag.stt6m7, @ViewBag.stt6m8, @ViewBag.stt6m9, @ViewBag.stt6m10, @ViewBag.stt6m11, @ViewBag.stt6m12]
+        },  {
+            name: 'Sử',
+            data: [@ViewBag.stt7m1, @ViewBag.stt7m2, @ViewBag.stt7m3, @ViewBag.stt7m4, @ViewBag.stt7m5, @ViewBag.stt7m6, @ViewBag.stt7m7, @ViewBag.stt7m8, @ViewBag.stt7m9, @ViewBag.stt7m10, @ViewBag.stt7m11, @ViewBag.stt7m12]
+        },  {
+            name: 'GDCD',
+            data: [@ViewBag.stt8m1, @ViewBag.stt8m2, @ViewBag.stt8m3, @ViewBag.stt8m4, @ViewBag.stt8m5, @ViewBag.stt8m6, @ViewBag.stt8m7, @ViewBag.stt8m8, @ViewBag.stt8m9, @ViewBag.stt8m10, @ViewBag.stt8m11, @ViewBag.stt8m12]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+            //Subject Test Chart Per Day
+     Highcharts.chart('SubjectTestChartPerDay', {
+
+        title: {
+            text: 'Số lượng bài thi các môn theo ngày'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng bài'
+            }
+        },
+
+         xAxis: {
+             categories: ['ngày 1', 'ngày 2', 'ngày 3', 'ngày 4', 'ngày 5', 'ngày 6',
+                 'ngày 7', 'ngày 8', 'ngày 9', 'ngày 10', 'ngày 11', 'ngày 12', 'ngày 13',
+                 'ngày 14', 'ngày 15', 'ngày 16', 'ngày 17', 'ngày 18', 'ngày 19', 'ngày 20',
+                 'ngày 21', 'ngày 22', 'ngày 23', 'ngày 24', 'ngày 25', 'ngày 26', 'ngày 27',
+                 'ngày 28', 'ngày 29', 'ngày 30', 'ngày 31'],
+             accessibility: {
+                 description: 'Ngày'
+             }
+         },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Bài'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+            }
+        },
+
+        series: [{
+            name: 'Toán',
+            data: [@ViewBag.stt1d1, @ViewBag.stt1d2, @ViewBag.stt1d3, @ViewBag.stt1d4, @ViewBag.stt1d5, @ViewBag.stt1d6, @ViewBag.stt1d7, @ViewBag.stt1d8, @ViewBag.stt1d9, @ViewBag.stt1d10, @ViewBag.stt1d11, @ViewBag.stt1d12,
+            @ViewBag.stt1d13, @ViewBag.stt1d14, @ViewBag.stt1d15, @ViewBag.stt1d16, @ViewBag.stt1d17, @ViewBag.stt1d18, @ViewBag.stt1d19, @ViewBag.stt1d20, @ViewBag.stt1d21, @ViewBag.stt1d22, @ViewBag.stt1d23, @ViewBag.stt1d24,
+            @ViewBag.stt1d25, @ViewBag.stt1d26, @ViewBag.stt1d27, @ViewBag.stt1d28, @ViewBag.stt1d29, @ViewBag.stt1d30, @ViewBag.stt1d31]
+        }, {
+            name: 'Hóa',
+            data: [@ViewBag.stt2d1, @ViewBag.stt2d2, @ViewBag.stt2d3, @ViewBag.stt2d4, @ViewBag.stt2d5, @ViewBag.stt2d6, @ViewBag.stt2d7, @ViewBag.stt2d8, @ViewBag.stt2d9, @ViewBag.stt2d10, @ViewBag.stt2d11, @ViewBag.stt2d12,
+            @ViewBag.stt2d13, @ViewBag.stt2d14, @ViewBag.stt2d15, @ViewBag.stt2d16, @ViewBag.stt2d17, @ViewBag.stt2d18, @ViewBag.stt2d19, @ViewBag.stt2d20, @ViewBag.stt2d21, @ViewBag.stt2d22, @ViewBag.stt2d23, @ViewBag.stt2d24,
+            @ViewBag.stt2d25, @ViewBag.stt2d26, @ViewBag.stt2d27, @ViewBag.stt2d28, @ViewBag.stt2d29, @ViewBag.stt2d30, @ViewBag.stt2d31]
+        }, {
+            name: 'Lý',
+            data: [@ViewBag.stt3d1, @ViewBag.stt3d2, @ViewBag.stt3d3, @ViewBag.stt3d4, @ViewBag.stt3d5, @ViewBag.stt3d6, @ViewBag.stt3d7, @ViewBag.stt3d8, @ViewBag.stt3d9, @ViewBag.stt3d10, @ViewBag.stt3d11, @ViewBag.stt3d12,
+            @ViewBag.stt3d13, @ViewBag.stt3d14, @ViewBag.stt3d15, @ViewBag.stt3d16, @ViewBag.stt3d17, @ViewBag.stt3d18, @ViewBag.stt3d19, @ViewBag.stt3d20, @ViewBag.stt3d21, @ViewBag.stt3d22, @ViewBag.stt3d23, @ViewBag.stt3d24,
+            @ViewBag.stt3d25, @ViewBag.stt3d26, @ViewBag.stt3d27, @ViewBag.stt3d28, @ViewBag.stt3d29, @ViewBag.stt3d30, @ViewBag.stt3d31]
+        }, {
+            name: 'Sinh',
+            data: [@ViewBag.stt4d1, @ViewBag.stt4d2, @ViewBag.stt4d3, @ViewBag.stt4d4, @ViewBag.stt4d5, @ViewBag.stt4d6, @ViewBag.stt4d7, @ViewBag.stt4d8, @ViewBag.stt4d9, @ViewBag.stt4d10, @ViewBag.stt4d11, @ViewBag.stt4d12,
+            @ViewBag.stt4d13, @ViewBag.stt4d14, @ViewBag.stt4d15, @ViewBag.stt4d16, @ViewBag.stt4d17, @ViewBag.stt4d18, @ViewBag.stt4d19, @ViewBag.stt4d20, @ViewBag.stt4d21, @ViewBag.stt4d22, @ViewBag.stt4d23, @ViewBag.stt4d24,
+            @ViewBag.stt4d25, @ViewBag.stt4d26, @ViewBag.stt4d27, @ViewBag.stt4d28, @ViewBag.stt4d29, @ViewBag.stt4d30, @ViewBag.stt4d31]
+        }, {
+            name: 'Anh',
+            data: [@ViewBag.stt5d1, @ViewBag.stt5d2, @ViewBag.stt5d3, @ViewBag.stt5d4, @ViewBag.stt5d5, @ViewBag.stt5d6, @ViewBag.stt5d7, @ViewBag.stt5d8, @ViewBag.stt5d9, @ViewBag.stt5d10, @ViewBag.stt5d11, @ViewBag.stt5d12,
+            @ViewBag.stt5d13, @ViewBag.stt5d14, @ViewBag.stt5d15, @ViewBag.stt5d16, @ViewBag.stt5d17, @ViewBag.stt5d18, @ViewBag.stt5d19, @ViewBag.stt5d20, @ViewBag.stt5d21, @ViewBag.stt5d22, @ViewBag.stt5d23, @ViewBag.stt5d24,
+            @ViewBag.stt5d25, @ViewBag.stt5d26, @ViewBag.stt5d27, @ViewBag.stt5d28, @ViewBag.stt5d29, @ViewBag.stt5d30, @ViewBag.stt5d31]
+        },  {
+            name: 'Địa',
+            data: [@ViewBag.stt6d1, @ViewBag.stt6d2, @ViewBag.stt6d3, @ViewBag.stt6d4, @ViewBag.stt6d5, @ViewBag.stt6d6, @ViewBag.stt6d7, @ViewBag.stt6d8, @ViewBag.stt6d9, @ViewBag.stt6d10, @ViewBag.stt6d11, @ViewBag.stt6d12,
+            @ViewBag.stt6d13, @ViewBag.stt6d14, @ViewBag.stt6d15, @ViewBag.stt6d16, @ViewBag.stt6d17, @ViewBag.stt6d18, @ViewBag.stt6d19, @ViewBag.stt6d20, @ViewBag.stt6d21, @ViewBag.stt6d22, @ViewBag.stt6d23, @ViewBag.stt6d24,
+            @ViewBag.stt6d25, @ViewBag.stt6d26, @ViewBag.stt6d27, @ViewBag.stt6d28, @ViewBag.stt6d29, @ViewBag.stt6d30, @ViewBag.stt6d31]
+        },  {
+            name: 'Sử',
+            data: [@ViewBag.stt7d1, @ViewBag.stt7d2, @ViewBag.stt7d3, @ViewBag.stt7d4, @ViewBag.stt7d5, @ViewBag.stt7d6, @ViewBag.stt7d7, @ViewBag.stt7d8, @ViewBag.stt7d9, @ViewBag.stt7d10, @ViewBag.stt7d11, @ViewBag.stt7d12,
+            @ViewBag.stt7d13, @ViewBag.stt7d14, @ViewBag.stt7d15, @ViewBag.stt7d16, @ViewBag.stt7d17, @ViewBag.stt7d18, @ViewBag.stt7d19, @ViewBag.stt7d20, @ViewBag.stt7d21, @ViewBag.stt7d22, @ViewBag.stt7d23, @ViewBag.stt7d24,
+            @ViewBag.stt7d25, @ViewBag.stt7d26, @ViewBag.stt7d27, @ViewBag.stt7d28, @ViewBag.stt7d29, @ViewBag.stt7d30, @ViewBag.stt7d31]
+        },  {
+            name: 'GDCD',
+            data: [@ViewBag.stt8d1, @ViewBag.stt8d2, @ViewBag.stt8d3, @ViewBag.stt8d4, @ViewBag.stt8d5, @ViewBag.stt8d6, @ViewBag.stt8d7, @ViewBag.stt8d8, @ViewBag.stt8d9, @ViewBag.stt8d10, @ViewBag.stt8d11, @ViewBag.stt8d12,
+            @ViewBag.stt8d13, @ViewBag.stt8d14, @ViewBag.stt8d15, @ViewBag.stt8d16, @ViewBag.stt8d17, @ViewBag.stt8d18, @ViewBag.stt8d19, @ViewBag.stt8d20, @ViewBag.stt8d21, @ViewBag.stt8d22, @ViewBag.stt8d23, @ViewBag.stt8d24,
+            @ViewBag.stt8d25, @ViewBag.stt8d26, @ViewBag.stt8d27, @ViewBag.stt8d28, @ViewBag.stt8d29, @ViewBag.stt8d30, @ViewBag.stt8d31]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    //School Chart By Member
+@*    Highcharts.chart('SchoolChartByMember', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Số lượng người dùng theo trường'
+        },
+        xAxis: {
+            categories: [
+                'FPT',
+                'Bách khoa',
+                'Ngoại ngữ',
+                'Kiến trúc',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Số lượng người dùng'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>&nbsp {point.y} người</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Người dùng',
+            data: [@ViewBag.mc1, @ViewBag.mc2, @ViewBag.mc3, @ViewBag.mc4]
+        }]
+    });
+    //School Chart By Member Per Month
+    Highcharts.chart('SchoolChartByMemberPerMonth', {
+
+        title: {
+            text: 'Số lượng người đăng ký ở các trường theo tháng'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Số lượng người đăng ký'
+            }
+        },
+
+        xAxis: {
+            categories: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            accessibility: {
+                description: 'Tháng'
+            }
+        },
+
+        tooltip: {
+            shared: true,
+            valueSuffix: ' Người'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+            }
+        },
+
+        series: [{
+            name: 'FPT',
+            data: [@ViewBag.mc1m1, @ViewBag.mc1m2, @ViewBag.mc1m3, @ViewBag.mc1m4, @ViewBag.mc1m5, @ViewBag.mc1m6, @ViewBag.mc1m7, @ViewBag.mc1m8, @ViewBag.mc1m9, @ViewBag.mc1m10, @ViewBag.mc1m11, @ViewBag.mc1m12]
+        }, {
+            name: 'Bách khoa',
+            data: [@ViewBag.mc2m1, @ViewBag.mc2m2, @ViewBag.mc2m3, @ViewBag.mc2m4, @ViewBag.mc2m5, @ViewBag.mc2m6, @ViewBag.mc2m7, @ViewBag.mc2m8, @ViewBag.mc2m9, @ViewBag.mc2m10, @ViewBag.mc2m11, @ViewBag.mc2m12]
+        }, {
+            name: 'Ngoại ngữ',
+            data: [@ViewBag.mc3m1, @ViewBag.mc3m2, @ViewBag.mc3m3, @ViewBag.mc3m4, @ViewBag.mc3m5, @ViewBag.mc3m6, @ViewBag.mc3m7, @ViewBag.mc3m8, @ViewBag.mc3m9, @ViewBag.mc3m10, @ViewBag.mc3m11, @ViewBag.mc3m12]
+        },  {
+            name: 'Kiến trúc',
+            data: [@ViewBag.mc4m1, @ViewBag.mc4m2, @ViewBag.mc4m3, @ViewBag.mc4m4, @ViewBag.mc4m5, @ViewBag.mc4m6, @ViewBag.mc4m7, @ViewBag.mc4m8, @ViewBag.mc4m9, @ViewBag.mc4m10, @ViewBag.mc4m11, @ViewBag.mc4m12]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+    //Point Chart By School
+    Highcharts.chart('PointChartBySchool', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Điểm trung bình các trường'
+        },
+        xAxis: {
+            categories: [
+                'FPT',
+                'Bách khoa',
+                'Ngoại ngữ',
+                'Kiến trúc',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Điểm'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>&nbsp {point.y} điểm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Điểm trung bình',
+            data: [@ViewBag.averageSchool1, @ViewBag.averageSchool2, @ViewBag.averageSchool3, @ViewBag.averageSchool4]
+        }]
+    });*@
+    //Point Chart By Subject
+    Highcharts.chart('PointChartBySubject', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Điểm trung bình các môn'
+        },
+        xAxis: {
+            categories: [
+                'Toán',
+                'Hóa',
+                'Lý',
+                'Sinh',
+                'Anh',
+                'Địa',
+                'Sử',
+                'GDCD',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Điểm'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>&nbsp {point.y} điểm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Điểm trung bình',
+            data: [@ViewBag.averageSubject1, @ViewBag.averageSubject2, @ViewBag.averageSubject3, @ViewBag.averageSubject4, @ViewBag.averageSubject5, @ViewBag.averageSubject6, @ViewBag.averageSubject7, @ViewBag.averageSubject8]
+        }]
+    });
+    </script>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+

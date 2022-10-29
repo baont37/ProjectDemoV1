@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.TestDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="testHistory">
+    <div class="containerr">
+        <div class="navv">
+            <a href="@Url.Action("Index","Home")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-house"></i>
+                    <h6>Home</h6>
+                </div>
+            </a>
+
+            <a href="@Url.Action("ChooseSubject","MakeTest")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h6>Kiểm tra</h6>
+                </div>
+            </a>
+        </div>
+
+        <div class="content">
+            <div class="title"><h1>Lịch sử kiểm tra</h1></div>
+            <div class="box">
+                <table>
+                    <tr>
+                        <th>STT</th>
+                        <th>Bài kiểm tra</th>
+                        <th>Điểm</th>
+                        <th>Thời gian</th>
+                        <th>Chi tiết bài kiểm tra</th>
+                    </tr>
+                    @{ int i = 1;}
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>@i</td>
+                    @{ i++;}
+                    <td>@Html.DisplayFor(modelItem => item.Subject.SubjectName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                    <td>
+                        @Convert.ToDateTime(item.CreateDate).ToString("dd/MM/yyyy HH:mm:ss")
+                    </td>
+                    <td><a href="@Url.Action("ViewTestDetails", "TestDetails", new { id = item.TestDetailId })">Xem chi tiết</a></td>
+                </tr>
+                    }
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

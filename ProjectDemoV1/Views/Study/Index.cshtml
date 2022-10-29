@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="study">
+    <div class="containerr">
+        <div class="navv">
+            <a href="@Url.Action("Index","Home")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-house"></i>
+                    <h6>Home</h6>
+                </div>
+            </a>
+            @if (@Session["AccountId"] != null)
+            {
+                <a href="@Url.Action("ChooseSubject", "MakeTest")">
+                    <div class="navv_item">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h6>Kiểm tra</h6>
+                    </div>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Home")">
+                    <div class="navv_item">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h6>Kiểm tra</h6>
+                    </div>
+                </a>
+            }
+        </div>
+
+        <div class="content">
+            <div class="subject">
+                <div class="subject_title"><h1>@ViewBag.SubjectTitle</h1></div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                <div class="btnn" style=" margin-top: 40px;">
+                    @Html.DropDownList("searching", null, "Chọn độ khó", new { @Class = "form-control", Style = "width:60%; border-radius:15px; padding-left:5px;" })
+                    <button type="submit" style="width:20%">Chọn</button>
+                </div>
+            }
+
+            <div class="question_box">
+                @{ int i = 1;}
+                @foreach (var item in Model)
+                {
+                <div class="question">
+                    @if (item.Level.LevelId == 1)
+                    {
+                        <span class="dot dot_level_easy">E</span>
+                    }
+                    else if (item.Level.LevelId == 2)
+                    {
+                        <span class="dot dot_level_medium">M</span>
+                    }
+                    else if (item.Level.LevelId == 3)
+                    {
+                        <span class="dot dot_level_hard">H</span>
+                    }
+                    <div class="question_title">
+                        <h3>Câu @i: <p>@Html.Raw(item.QuestionContent)</p></h3>
+
+
+                        @{ i++;
+                        }
+                    </div>
+                    <div class="answer">
+                        <ul class="answer_list">
+                            <li class="answer_option">
+                                <p>A. @Html.DisplayFor(modelItem => item.OptionA)</p>
+                            </li>
+                            <li class="answer_option">
+                                <p>B. @Html.DisplayFor(modelItem => item.OptionB)</p>
+                            </li>
+                            <li class="answer_option">
+                                <p>C. @Html.DisplayFor(modelItem => item.OptionC)</p>
+                            </li>
+                            <li class="answer_option">
+                                <p>D. @Html.DisplayFor(modelItem => item.OptionD)</p>
+                            </li>
+                        </ul>
+                        @if (item.Image != null)
+                        {
+                            <div class="question_img">
+                                <img src="@Url.Action("getImg", "Questions", new { id = item.QuestionId })" />
+                            </div>
+                        }
+                    </div>
+                    <div class="showsolution" onclick="show(this)" style="cursor:pointer;">Xem lời giải</div>
+                    <div class="question_right_answer">
+                        <div><h4>Đáp án đúng: @Html.DisplayFor(modelItem => item.Answer.AnswerName)</h4></div>
+                        <div>
+                            <p>
+                                @Html.Raw(item.Solution)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

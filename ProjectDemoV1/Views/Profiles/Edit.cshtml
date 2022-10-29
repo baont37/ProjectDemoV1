@@ -1,0 +1,108 @@
+﻿@model ProjectDemoV1.Models.Profile
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="profile">
+    @using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="containerr">
+            <div class="content">
+                <div class="personal-image">
+                    <label class="label">
+                        <input type="file" name="uploadImage" id="filetag" accept="image/*" />
+                        <figure class="personal-figure">
+                            @if (Model.Avatar == null)
+                            {
+                                <img src="~/Content/assets/img/logo.png" class="personal-avatar" id="preview" alt="avatar">
+                            }
+                            else
+                            {
+                                <img src="@Url.Action("getImg", "Profiles", new { id = Model.AccountId })" class="personal-avatar" id="preview" alt="avatar">
+                            }
+                            <figcaption class="personal-figcaption">
+                                <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+                            </figcaption>
+                        </figure>
+                    </label>
+                    <h2 style="text-align:center;">@Session["UserName"]</h2>
+                </div>
+                <div class="info">
+                    <div class="info_item">
+                        <div class="info_item_title"><h3>Họ và tên</h3></div>
+                        <div class="info_item_content control-label ">
+                            @Html.HiddenFor(model => model.AccountId, new { htmlAttributes = new { @Value = Session["AccountId"] } })
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="info_item">
+                        <div class="info_item_title"><h3>Ngày sinh</h3></div>
+                        <div class="info_item_content">
+                            @Html.TextBoxFor(model => model.BirthDay, "{0:dd/MM/yyyy}",  new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BirthDay, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="info_item">
+
+                        <div class="info_item_title"><h3>Số điện thoại</h3></div>
+                        <div class="info_item_content">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="info_item">
+                        <div class="info_item_title"><h3>Giới tính</h3></div>
+                        <div class="info_item_content">
+                            @Html.DropDownList("GenderId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="info_item">
+                        <div class="info_item_title"><h3>Trường</h3></div>
+                        <div class="info_item_content">
+                            @Html.EditorFor(model => model.SchoolName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SchoolName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="info_item">
+                        <div class="info_item_title"><h3>Email</h3></div>
+                        <div class="info_item_content">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="btnn">
+                    <a href="@Url.Action("Details", "Profiles", new { id = Model.AccountId })">Quay lại</a>
+                    <button type="submit" value="Lưu">Lưu</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    var fileTag = document.getElementById("filetag"),
+        preview = document.getElementById("preview");
+
+    fileTag.addEventListener("change", function () {
+        changeImage(this);
+    });
+
+    function changeImage(input) {
+        var reader;
+
+        if (input.files && input.files[0]) {
+            reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

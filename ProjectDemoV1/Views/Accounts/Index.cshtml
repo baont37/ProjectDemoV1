@@ -1,0 +1,64 @@
+﻿
+@using ProjectDemoV1.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@Styles.Render("~/Content/css")
+<div class="content">
+    <p>
+        @Html.ActionLink("Thêm mới", "Create", "Accounts", new { @class = "btn btn-primary" })
+    </p>
+    <h2>Tài khoản người dùng</h2>
+    <table>
+        <tr>
+            <th>
+                Tên người dùng
+            </th>
+            <th>
+                Loại tài khoản
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.RoleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.CreateDate).ToString("dd/MM/yyyy HH:mm:ss")
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Accounts", new { id = item.AccountId })" style="color: limegreen">
+                        Sửa
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount <Model.PageNumber?0:Model.PageNumber)/@Model.PageCount)
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</div>

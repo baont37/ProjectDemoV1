@@ -1,0 +1,96 @@
+﻿@model ProjectDemoV1.ViewModel.ViewQuestionInQuestionTest
+
+<div class="test">
+    <div class="containerr">
+        <div class="content">
+            <div class="subject">
+                <div class="subject_title"><h1>@ViewBag.SubjectName</h1></div>
+                <div class="subject_time"><h1 id="demo"></h1></div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.TestDetailId)
+
+                <div class="question_box">
+                    @for (int i = 0; i < Model.Questions.Count; i++)
+                    {
+                        <div class="question">
+                            @Html.HiddenFor(modelItem => Model.Questions[i].QuetionTestId)
+                            @Html.HiddenFor(modelItem => Model.Questions[i].QuestionId)
+                            @Html.HiddenFor(modelItem => Model.Questions[i].AnswerId)
+                            <div class="question_title"><h3>Câu @(i+1): @Html.Raw(Model.Questions[i].QuestionContent)</h3></div>
+                            <div class="answer">
+                                <ul class="answer_list">
+                                    <li class="answer_option">
+                                        <span> @Html.RadioButtonFor(modelItem => Model.Questions[i].UserAnswer, "1") A. @Html.DisplayFor(modelItem => Model.Questions[i].OptionA) </span>
+                                    </li>
+                                    <li class="answer_option">
+                                        <span> @Html.RadioButtonFor(modelItem => Model.Questions[i].UserAnswer, "2") B. @Html.DisplayFor(modelItem => Model.Questions[i].OptionB)</span>
+                                    </li>
+                                    <li class="answer_option">
+                                        <span> @Html.RadioButtonFor(modelItem => Model.Questions[i].UserAnswer, "3") C. @Html.DisplayFor(modelItem => Model.Questions[i].OptionC)</span>
+                                    </li>
+                                    <li class="answer_option">
+                                        <span> @Html.RadioButtonFor(modelItem => Model.Questions[i].UserAnswer, "4") D. @Html.DisplayFor(modelItem => Model.Questions[i].OptionD)</span>
+                                    </li>
+                                </ul>
+                                @if (Model.Questions[i].Image != null)
+                                {
+                                    <div class="question_img">
+                                        <img src="@Url.Action("getImg", "MakeTest", new { id = Model.Questions[i].QuestionId })" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="btnn"><button type="submit">Nộp bài</button></div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    // Set the date we're counting down to
+    /**/
+    var countDownDate = new Date("@ViewBag.OutTime").getTime();
+    /**/
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        /*var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));*/
+        var minutes = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("demo").innerHTML = /*hours + " giờ " +*/ zeros(minutes) + ":" + zeros(seconds)
+
+
+        //get zero second: 00
+        // If the count down is over, write some text
+        if (distance <= 0) {
+            $("form").submit();
+        }
+    }, 1000);
+
+    function zeros(i) {
+        if (i < 10) {
+            return "0" + i;
+        } else {
+            return i;
+        }
+    }
+</script>
+
+
+

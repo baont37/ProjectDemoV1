@@ -1,0 +1,63 @@
+﻿@model ProjectDemoV1.Models.Profile
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="profile">
+    <div class="containerr">
+        <div class="content">
+            <div class="personal-image">
+                <label class="label">
+                    <figure class="personal-figure">
+                        @if (Model.Avatar == null)
+                        {
+                            <img src="~/Content/assets/img/logo.png" class="personal-avatar" alt="avatar">
+                        }
+                        else
+                        {
+                            <img src="@Url.Action("getImg", "Profiles", new { id = Model.AccountId })" class="personal-avatar" alt="avatar">
+                        }
+                    </figure>
+                </label>
+                <h2 style="text-align:center;">@Session["UserName"]</h2>
+            </div>
+            <div class="info">
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Họ và tên</h3></div>
+                    <div class="info_item_content"><h3>@Html.DisplayFor(model => model.FullName)</h3></div>
+                </div>
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Ngày sinh</h3></div>
+                    <div class="info_item_content">
+                        <h3>
+                            @Convert.ToDateTime(Model.BirthDay).ToString("dd/MM/yyyy")
+                        </h3>
+                    </div>
+                </div>
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Số điện thoại</h3></div>
+                    <div class="info_item_content"><h3>@Html.DisplayFor(model => model.Phone)</h3></div>
+                </div>
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Giới tính</h3></div>
+                    <div class="info_item_content"><h3>@Html.DisplayFor(model => model.Gender.GenderName)</h3></div>
+                </div>
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Trường</h3></div>
+                    <div class="info_item_content"><h3>@Html.DisplayFor(model => model.SchoolName)</h3></div>
+                </div>
+                <div class="info_item">
+                    <div class="info_item_title"><h3>Email</h3></div>
+                    <div class="info_item_content"><h3>@Html.DisplayFor(model => model.Email)</h3></div>
+                </div>
+            </div>
+            <div class="btnn">
+                <a href="@Url.Action("Index","Home")">Quay lại</a>
+                <a href="@Url.Action("Changepassword","Profiles")">Đổi mật khẩu</a>
+                <a href="@Url.Action("Edit","Profiles", new { id = Session["AccountId"]})">Chỉnh sửa</a>
+            </div>
+        </div>
+    </div>
+</div>

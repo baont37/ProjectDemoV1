@@ -1,0 +1,51 @@
+﻿@model ProjectDemoV1.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div>
+        <h4>Account</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Profile.FullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Profile.FullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Role.RoleName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Role.RoleName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AccountId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>  

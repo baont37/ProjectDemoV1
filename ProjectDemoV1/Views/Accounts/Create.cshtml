@@ -1,0 +1,57 @@
+﻿@model ProjectDemoV1.Models.Account
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+<div class="content">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Account</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <strong class="control-label col-md-2">Tên người dùng</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Mật Khẩu</strong>
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.PassWord, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>
+                @Html.HiddenFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now } })
+                @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <strong class="control-label col-md-2">Loại tài khoản</strong>
+                <div class="col-md-10">
+                    @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tạo" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Quay về", "Index")
+    </div>
+</div>

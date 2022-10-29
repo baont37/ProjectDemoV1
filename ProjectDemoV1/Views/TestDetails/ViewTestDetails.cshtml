@@ -1,0 +1,164 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.QuestionTest>
+
+@{
+    ViewBag.Title = "ViewTestDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@functions {
+    string makeColorAnswer(ProjectDemoV1.Models.QuestionTest item, int idAnswer)
+    {
+        if (item.AnswerId != idAnswer)
+        {
+            if (item.Question.Answer_Id != idAnswer)
+            {
+                return "";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        else
+        {
+            if (item.AnswerId == item.Question.Answer_Id)
+            {
+                return "color:#60e76e";
+            }
+            else
+            {
+                return "color:red";
+            }
+        }
+        //return "";
+    }
+
+    int CountRightAnswer(int id)
+    {
+        var rightAnswer = 0;
+        foreach (var item in Model)
+        {
+            if (id == item.TestDetailId)
+            {
+                if (item.AnswerId == item.Question.Answer_Id)
+                {
+                    rightAnswer++;
+                }
+            }
+        }
+
+        return rightAnswer;
+    }
+}
+
+
+<div class="test">
+    <div class="containerr">
+
+        <div class="navv">
+            <a href="@Url.Action("Index","Home")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-house"></i>
+                    <h6>Home</h6>
+                </div>
+            </a>
+
+            <a href="@Url.Action("ChooseSubject","MakeTest")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h6>Kiểm tra</h6>
+                </div>
+            </a>
+
+        </div>
+
+
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Môn học</th>
+                    <th>Số câu đúng</th>
+                    <th>Điểm</th>
+                </tr>
+                <tr>
+                    <td>@ViewBag.SubjectTitle</td>
+                    <td>@CountRightAnswer(@ViewBag.TestDetailId)/@ViewBag.TotalQuestions</td>
+                    <td>@ViewBag.Score</td>
+                </tr>
+            </table>
+
+            <div class="question_box" id="Grid">
+                @{ int i = 1;}
+                @foreach (var item in Model)
+                {
+                    var style = "";
+                    var cl = "";
+                    if (item.AnswerId == item.Question.Answer_Id)
+                    {
+                        style = "color:#60e76e";
+                        cl = "fa-solid fa-check";
+                    }
+                    else
+                    {
+                        style = "color:red";
+                        cl = "fa-solid fa-x";
+                    }
+
+
+                    <div class="question">
+                        <div class="question_title"><h3>Câu @i: @Html.Raw(item.Question.QuestionContent) <i class="@cl" style="@style"></i></h3></div>
+                        @{ i++;}
+                        <div class="answer">
+                            <ul class="answer_list">
+                                <li class="answer_option" style="@makeColorAnswer(item, 1)">
+                                    <span>A. @Html.DisplayFor(modelItem => item.Question.OptionA)</span>
+                                </li>
+                                <li class="answer_option" style="@makeColorAnswer(item, 2)">
+                                    <span>B. @Html.DisplayFor(modelItem => item.Question.OptionB)</span>
+                                </li>
+                                <li class="answer_option" style="@makeColorAnswer(item, 3)">
+                                    <span>C. @Html.DisplayFor(modelItem => item.Question.OptionC)</span>
+                                </li>
+                                <li class="answer_option" style="@makeColorAnswer(item, 4)">
+                                    <span>D. @Html.DisplayFor(modelItem => item.Question.OptionD)</span>
+                                </li>
+                            </ul>
+                            @if (item.Question.Image != null)
+                            {
+                                <div class="question_img">
+                                    <img src="@Url.Action("getImg", "MakeTest", new { id = item.QuestionId })" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="btnn">
+                <a href="@Url.Action("Index","TestDetails",new { id = @Session["AccountId"] })">Lịch sử</a>
+                <a href="@Url.Action("Index","Home")">Về trang chủ</a>
+            </div>
+
+            @*
+                xuat file pdf
+        @using (Html.BeginForm("Export", "TestDetails", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="GridHtml" />
+            <input type="submit" id="btnSubmit" value="Export" />
+        }
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#btnSubmit").click(function () {
+                    $("input[name='GridHtml']").val($("#Grid").html());
+                });
+            });
+        </script>
+                *@
+        </div>
+    </div>
+</div>
+
+
+

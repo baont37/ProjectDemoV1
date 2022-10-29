@@ -1,0 +1,42 @@
+﻿@model ProjectDemoV1.Models.Question
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <h3>Bạn có chắn chắn xóa câu hỏi này không?</h3>
+    <div class="question">
+        <div class="question_title"><h3>@Html.Raw(Model.QuestionContent)</h3></div>
+        <div class="answer">
+            <ul class="answer_list">
+                <li class="answer_option"><p>A. @Html.DisplayFor(model => model.OptionA).</p></li>
+                <li class="answer_option"><p>B. @Html.DisplayFor(model => model.OptionB).</p></li>
+                <li class="answer_option"><p>C. @Html.DisplayFor(model => model.OptionC).</p></li>
+                <li class="answer_option"><p>D. @Html.DisplayFor(model => model.OptionD).</p></li>
+            </ul>
+            @if (Model.Image != null)
+            {
+                <div class="question_img">
+                    <img src="@Url.Action("getImg", "Questions", new { id = Model.QuestionId })" />
+                </div>
+            }
+        </div>
+        <div class="question_rigth_answer"><h4>Đáp án đúng: @Html.DisplayFor(model => model.Answer.AnswerName)</h4></div>
+        <div class="question_rigth_answer"><h5>Loại câu hỏi: @Html.DisplayFor(model => model.TestType.TestTypeName)</h5></div>
+        <div class="question_rigth_answer"><h5>Độ khó: @Html.DisplayFor(model => model.Level.LevelName)</h5></div>
+        <div class="question_rigth_answer"><h5>Người đăng: @Html.DisplayFor(model => model.Account.UserName)</h5></div>
+        <div class="question_solution"><p><strong style="display:inline;">Lời giải: </strong>@Html.Raw(Model.Solution)</p></div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="btnn">
+    <a style="text-decoration:none; color:black;" href="@Url.Action("Index","QuestionsApprove")">Quay lại</a>
+    <button type="submit">Xóa</button>
+</div>
+    }
+</div>
+

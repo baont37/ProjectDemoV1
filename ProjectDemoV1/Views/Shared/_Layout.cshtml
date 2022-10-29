@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png" type="image/x-icon">
+    <title>ZOT - Zúp Ôn Tập</title>
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fc6ea370d2.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/js/script.js"></script>
+    <link rel="stylesheet" href="~/Content/assets/css/dropdown.css">
+</head>
+<body>
+        <div class="header">
+            <a href="@Url.Action("Index","Home")" class="header_logo"><img src="~/Content/assets/img/logo_white.png" alt="ZOT"><h4>Học, Học nữa, Học mãi</h4></a>
+            @if (@Session["AccountId"] == null)
+            {
+                <a href="@Url.Action("Login","Home")" class="header_btn">
+                    <div><h5>Đăng nhập</h5></div>
+                </a>
+            }
+            @if (@Session["AccountId"] != null)
+            {
+                <div class="dropdownn">
+                    <button>@Session["UserName"]</button>
+                    <ul class="dropdown_list">
+                        @if (Convert.ToInt32(@Session["RoleId"]) == 1 || Convert.ToInt32(@Session["RoleId"]) == 2)
+                        {
+                            <li class="dropdown_list_item"><a href="@Url.Action("Statistic","Dashboard")">Quản lý</a></li>
+                        }
+                        <li class="dropdown_list_item"><a href="@Url.Action("Details","Profiles", new {id = @Session["AccountId"]})">Thông tin tài khoản</a></li>
+                        <li class="dropdown_list_item"><a href="@Url.Action("Index","TestDetails", new {id = @Session["AccountId"]})">Lịch sử kiểm tra</a></li>
+                        <li class="dropdown_list_item"><a href="@Url.Action("Logout","Home")">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            }
+        </div>
+
+        @RenderBody()
+
+        <div class="footer">
+            <h5>@DateTime.Now.Year ZOT - Zúp Ôn Tập</h5>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

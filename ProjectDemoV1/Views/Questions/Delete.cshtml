@@ -1,0 +1,39 @@
+﻿@model ProjectDemoV1.Models.Question
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <h3 style="margin-bottom:20px;">Bạn có chắn chắn xóa câu hỏi này không?</h3>
+    <div class="question">
+        <div class="question_title"><h3>@Html.Raw(Model.QuestionContent)</h3></div>
+        <div class="answer">
+            <ul class="answer_list">
+                <li class="answer_option"><p>A. @Html.DisplayFor(model => model.OptionA).</p></li>
+                <li class="answer_option"><p>B. @Html.DisplayFor(model => model.OptionB).</p></li>
+                <li class="answer_option"><p>C. @Html.DisplayFor(model => model.OptionC).</p></li>
+                <li class="answer_option"><p>D. @Html.DisplayFor(model => model.OptionD).</p></li>
+            </ul>
+            @if (Model.Image != null)
+            {
+                <div class="question_img">
+                    <img src="@Url.Action("getImg", "Questions", new { id = Model.QuestionId })" />
+                </div>
+            }
+        </div>
+        <div class="question_rigth_answer"><h4>Đáp án đúng: @Html.DisplayFor(model => model.Answer.AnswerName)</h4></div>
+        <div class="question_solution"><p>@Html.DisplayFor(model => model.Solution)</p></div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="btnn">
+    <a style="text-decoration:none; color:black;" href="@Url.Action("Index","Questions", new { id = Model.SubjectId })">Quay lại</a>
+    <button type="submit">Xóa</button>
+</div>
+    }
+</div>
+

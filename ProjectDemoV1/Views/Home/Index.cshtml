@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.Subject>
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="home">
+    <div class="containerr">
+        <!-- #F5F5F5 màu hover
+        #E8EBED màu select
+        #04bfad
+    -->
+        <div class="navv">
+            <a href="@Url.Action("Index","Home")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-house"></i>
+                    <h6>Home</h6>
+                </div>
+            </a>
+            @if (@Session["AccountId"] != null)
+            {
+                <a href="@Url.Action("ChooseSubject", "MakeTest")">
+                    <div class="navv_item">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h6>Kiểm tra</h6>
+                    </div>
+                </a>
+            }
+            else
+            {
+            <a href="@Url.Action("Login", "Home")">
+                <div class="navv_item">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h6>Kiểm tra</h6>
+                </div>
+            </a>
+            }
+        </div>
+
+        <div class="content">
+            <div class="content_popular">
+                <div class="content_title"><h3>Môn học phổ biến nhất</h3></div>
+                <div id="slideshow">
+                    <div class="content_popular_box">
+                        <a href="@Url.Action("Index", "Study", new {id = 1})" class="content_item_popular math"><div><h1>Toán</h1></div></a>
+                        <a href="@Url.Action("Index", "Study", new {id = 2})" class="content_item_popular physics"><div><h1>Vật Lý</h1></div></a>
+                        <a href="@Url.Action("Index", "Study", new {id = 3})" class="content_item_popular chemistry"><div><h1>Hóa Học</h1></div></a>
+                        <a href="@Url.Action("Index", "Study", new {id = 8})" class="content_item_popular english"><div><h1>Anh</h1></div></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content_part">
+                <div class="content_title"><h3>Môn học chính</h3></div>
+                <div class="content_box">
+                    <a href="@Url.Action("Index", "Study", new {id = 1})" class="content_item math"><div><h2>Toán</h2></div></a>
+                    <a href="@Url.Action("Index", "Study", new {id = 8})" class="content_item english"><div><h2>Anh</h2></div></a>
+                </div>
+            </div>
+
+            <div class="content_part">
+                <div class="content_title"><h3>Tổ hợp khoa học tự nhiên</h3></div>
+                <div class="content_box">
+                    <a href="@Url.Action("Index", "Study", new {id = 2})" class="content_item physics"><div><h2>Vật Lý</h2></div></a>
+                    <a href="@Url.Action("Index", "Study", new {id = 3})" class="content_item chemistry"><div><h2>Hóa Học</h2></div></a>
+                    <a href="@Url.Action("Index", "Study", new {id = 4})" class="content_item biology"><div><h2>Sinh Học</h2></div></a>
+                </div>
+            </div>
+            <div class="content_part">
+                <div class="content_title"><h3>Tổ hợp khoa học xã hội</h3></div>
+                <div class="content_box">
+                    <a href="@Url.Action("Index", "Study", new {id = 5})" class="content_item history"><div><h2>Lịch Sử</h2></div></a>
+                    <a href="@Url.Action("Index", "Study", new {id = 6})" class="content_item geography"><div><h2>Địa lý</h2></div></a>
+                    <a href="@Url.Action("Index", "Study", new {id = 7})" class="content_item civic-education"><div><h2>GDCD</h2></div></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

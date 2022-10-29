@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content">
+    <table>
+        <tr>
+            <th>STT</th>
+            <th>Môn</th>
+            <th>
+                Độ khó
+            </th>
+            <th>
+                Loại câu hỏi
+            </th>
+            <th>
+                Người thêm
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Xem chi tiết
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@i</td>
+        @{i++;
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level.LevelName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestType.TestTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusName)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", "Questions", new { id = item.QuestionId })" style="color: cornflowerblue">
+                Xem chi tiết
+            </a>
+        </td>
+        @if (Convert.ToInt32(@Session["RoleId"]) == 1)
+        {
+            if (item.TestTypeId == 1)
+            {
+                <td>
+                    <a href="@Url.Action("Edit", "Questions", new { id = item.QuestionId })" style="color: limegreen">
+                        Sửa
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "Questions", new { id = item.QuestionId })" style="color: firebrick">
+                        Xóa
+                    </a>
+                </td>
+            }
+            else
+            {
+                <td></td>
+                <td></td>
+            }
+        }
+    </tr>
+        }
+
+    </table>
+</div>
+

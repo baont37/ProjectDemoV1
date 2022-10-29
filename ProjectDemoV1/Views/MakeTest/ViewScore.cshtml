@@ -1,0 +1,45 @@
+﻿@model ProjectDemoV1.Models.TestDetail
+
+@{
+    ViewBag.Title = "ViewScore";
+}
+
+<div class="testResult">
+    <div class="containerr">
+        <div class="content">
+            <div class="title"><h1>Kết quả bài thi</h1></div>
+            <table>
+                <tr>
+                    <th>Môn học</th>
+                    <th>Điểm</th>
+                    <th>Ngày tạo</th>
+                    <th>Chi tiết bài kiểm tra</th>
+                </tr>
+                <tr>
+                    <td>@ViewBag.SubjectName</td>
+                    <td>@Html.DisplayFor(model => model.Score)</td>
+                    <td>
+                        @Convert.ToDateTime(Model.CreateDate).ToString("dd/MM/yyyy HH:mm:ss")
+                    </td>
+                    <td><a href="@Url.Action("ViewTestDetails", "TestDetails", new { id = Model.TestDetailId })">Xem chi tiết</a></td>
+                </tr>
+            </table>
+
+            <div class="btnn">
+                <a href="@Url.Action("Index","TestDetails", new {id = @Session["AccountId"]})">Lịch sử</a>
+                <a href="@Url.Action("Index", "Home")">Về trang chủ</a>
+                @using (@Html.BeginForm("MakeTestAgain", "MakeTest", FormMethod.Post))
+                {
+
+                    @Html.HiddenFor(model => model.TestDetailId)
+                    @Html.AntiForgeryToken()
+                    <button type="submit">Kiểm tra lại</button>
+                }
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

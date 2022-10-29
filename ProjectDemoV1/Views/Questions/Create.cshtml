@@ -1,0 +1,149 @@
+﻿@model ProjectDemoV1.Models.Question
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<div class="content">
+    @using (Html.BeginForm("Create", "Questions", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Môn</strong>
+                <div class="col-md-10">
+                    @Html.DropDownList("SubjectId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Độ khó</strong>
+                <div class="col-md-10">
+                    @Html.DropDownList("LevelId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LevelId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Loại câu hỏi</strong>
+                <div class="col-md-10">
+                    @Html.DropDownList("TestTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TestTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Câu hỏi</strong>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.QuestionContent, new { htmlAttributes = new { @class = "form-control" }, @id = "editor" })
+                    @Html.ValidationMessageFor(model => model.QuestionContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Ảnh đính kèm</strong>
+                <div class="col-md-10">
+                    <input type="file" name="uploadImage" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Đáp án A</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OptionA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OptionA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Đáp án B</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OptionB, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OptionB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Đáp án C</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OptionC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OptionC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Đáp án D</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.OptionD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OptionD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Câu trả lời</strong>
+                <div class="col-md-10">
+                    @Html.DropDownList("Answer_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Answer_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong class="control-label col-md-2">Lời giải</strong>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Solution, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Solution, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.AccountId, new { @class = "form-control", @Value = @Session["AccountId"], @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            @if (Convert.ToInt32(@Session["RoleId"]) == 1)
+            {
+                <div class="form-group">
+                    <strong class="control-label col-md-2">Trạng thái</strong>
+                    <div class="col-md-10">
+                        @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LevelId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            @if (Convert.ToInt32(@Session["RoleId"]) == 2)
+            {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.StatusId, new { @class = "form-control", @Value = ViewBag.StatusDefault, @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    CKEDITOR.replace("editor");
+    function saveText() {
+        CKEDITOR.instances.editor.getData();
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

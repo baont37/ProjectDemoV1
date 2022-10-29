@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProjectDemoV1.ViewModel.StaticSubject>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <table>
+        <tr>
+            <th>STT</th>
+            <th>Môn</th>
+            <th>Thời gian</th>
+            <th>Số lượng câu hỏi</th>
+            <th>Tổ hợp</th>
+            <th>Duyệt câu hỏi</th>
+        </tr>
+
+        @{int i = 1;}
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@i</td>
+
+        @{i++;
+        }
+        <td>@Html.DisplayFor(modelItem => item.SubjectName)</td>
+        <td>@TimeSpan.FromMinutes(item.Duration).TotalMinutes phút</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalApproveQuestion)
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.CombinationName)</td>
+        <td>
+            <a style="color: dodgerblue;" href="@Url.Action("ApproveDetails","QuestionsApprove", new { subjectId=item.SubjectId, testTypeId = 1})">Học</a>
+            <a style="color: dodgerblue; margin-left: 15px;" href="@Url.Action("ApproveDetails", "QuestionsApprove", new { subjectId=item.SubjectId, testTypeId = 2})">Thi</a>
+        </td>
+    </tr>
+        }
+    </table>
+</div>

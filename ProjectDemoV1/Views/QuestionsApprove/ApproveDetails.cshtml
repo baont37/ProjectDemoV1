@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ProjectDemoV1.Models.Question>
+
+@{
+    ViewBag.Title = "ApproveDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+
+    <br />
+    <h1>
+        Môn: @ViewBag.Subject
+    </h1>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="btnn" style=" margin-top: 40px; margin-bottom:40px;">
+    @Html.DropDownList("searching", null, "Chọn độ khó", new { @Class = "form-control", Style = "width:60%; border-radius:15px; padding-left:5px;" })
+    <button type="submit" style="width:20%">Chọn</button>
+</div>
+    }
+
+
+
+    @{int i = 1;}
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+<div class="btnn" style=" margin-top: 40px; margin-bottom:40px;">
+
+    <a style="text-decoration:none; color:black;" href="@Url.Action("Index", "QuestionsApprove") ">Quay lại</a>
+    <button type="submit" name="SubmitButtonAll" value="Duyệt tất cả" class="btn btn-sm btn-success" style="color: black;">Duyệt tất cả</button>
+</div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="question" style="margin-top:10px;">
+            <div class="question_title"><h3 style="display:inline;">Câu @i: </h3><h3 style="display:inline">@Html.Raw(item.QuestionContent)</h3></div>
+            @{ i++;}
+            <div class="answer">
+                <ul class="answer_list">
+                    <li class="answer_option"><p>A. @Html.DisplayFor(modelItem => item.OptionA).</p></li>
+                    <li class="answer_option"><p>B. @Html.DisplayFor(modelItem => item.OptionB).</p></li>
+                    <li class="answer_option"><p>C. @Html.DisplayFor(modelItem => item.OptionC).</p></li>
+                    <li class="answer_option"><p>D. @Html.DisplayFor(modelItem => item.OptionD).</p></li>
+                </ul>
+                @if (item.Image != null)
+                {
+                    <div class="question_img">
+                        <img src="@Url.Action("getImg", "QuestionsApprove", new { id = item.QuestionId })" />
+                    </div>
+                }
+            </div>
+            <div class="question_rigth_answer"><strong>Đáp án đúng: </strong>@Html.DisplayFor(modelItem => item.Answer.AnswerName)</div>
+            <div class="question_rigth_answer"><strong>Loại câu hỏi: </strong>@Html.DisplayFor(modelItem => item.TestType.TestTypeName)</div>
+            <div class="question_rigth_answer"><strong>Độ khó: </strong>@Html.DisplayFor(modelItem => item.Level.LevelName)</div>
+            <div class="question_rigth_answer"><strong>Người đăng: </strong>@Html.DisplayFor(modelItem => item.Account.UserName)</div>
+            <div class="question_solution"><strong style="display:inline;">Lời giải: </strong>@Html.Raw(item.Solution)</div>
+
+            <div class="btnn" style="padding-bottom:10px;">
+                @if (Convert.ToInt32(@Session["RoleId"]) == 1)
+                {
+
+                    using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", item.QuestionId)
+                        <button type="submit" name="SubmitButton" value="Duyệt" class="btn btn-sm btn-success" style="color: black;">Duyệt</button>
+                    }
+                    <a style="text-decoration:none; color:black;" href="@Url.Action("Edit","QuestionsApprove", new { id = item.QuestionId, subjectId = item.SubjectId, tesTypeId = item.TestTypeId })">Sửa</a>
+                    <a style="text-decoration:none; color:black;" href="@Url.Action("Delete","QuestionsApprove", new { id = item.QuestionId })">Xóa</a>
+                }
+            </div>
+        </div>
+    }
+</div>

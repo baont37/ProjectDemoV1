@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/assets/img/favicon.png" type="image/x-icon">
+    <title>ZOT - Zúp Ôn Tập</title>
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fc6ea370d2.js" crossorigin="anonymous"></script>
+    <script src="~/Content/assets/js/test.js"></script>
+    <link rel="stylesheet" href="~/Content/assets/css/dropdown.css">
+</head>
+<body class="admin">
+    <div class="header">
+        <a href="@Url.Action("Index","Subjects")" class="header_logo"><img src="~/Content/assets/img/logo_white.png" alt="ZOT"><h4>Học, Học nữa, Học mãi</h4></a>
+        <div class="dropdownn">
+            <button>@Session["UserName"]</button>
+            <ul class="dropdown_list" style=" top: 43px;">
+                <li class="dropdown_list_item"><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                <li class="dropdown_list_item"><a href="@Url.Action("Details","Profiles", new {id = @Session["AccountId"]})">Thông tin tài khoản</a></li>
+                <li class="dropdown_list_item"><a href="@Url.Action("Index","TestDetails",new {id = @Session["AccountId"] })">Lịch sử kiểm tra</a></li>
+                <li class="dropdown_list_item"><a href="@Url.Action("Logout","Home")">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="containerr">
+        <div class="admin_sidebar">
+            <div class="admin_sidebar_item">@Html.ActionLink("Thống kê", "Statistic", "Dashboard")</div>
+            <div class="admin_sidebar_item">@Html.ActionLink("Bài kiểm tra", "Index", "StatisticalTest")</div>
+            <div class="admin_sidebar_item">@Html.ActionLink("Chi tiết các môn", "Index", "Subjects")</div>
+            <div class="admin_sidebar_item"><a href="@Url.Action("Create", "QuestionsApprove")">Thêm Câu hỏi</a></div>
+            @if (Convert.ToInt32(@Session["RoleId"]) == 1)
+            {
+                <div class="admin_sidebar_item"><a href="@Url.Action("Index","QuestionsApprove")">Duyệt câu hỏi</a></div>
+                <div class="admin_sidebar_item">@Html.ActionLink("Tài Khoản", "Index", "Accounts")</div>
+            }
+        </div>
+            @RenderBody()
+    </div>
+
+    <div class="footer">
+        <h5>@DateTime.Now.Year ZOT - Zúp Ôn Tập</h5>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿@model ProjectDemoV1.ViewModel.ViewTestDetail
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class ="chooseTest">
+    <div class="containerr">
+        <div class="navv">
+            <a href="home.html">
+                <div class="navv_item">
+                    <i class="fa-solid fa-house"></i>
+                    <h6>Home</h6>
+                </div>
+            </a>
+
+            <a href="chooseTest.html">
+                <div class="navv_item">
+                    <i class="fa-solid fa-list-check"></i>
+                    <h6>Kiểm tra</h6>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="content">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+            <div class="form-group">
+    <div class="col-md-10">
+       
+        @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
+    </div>
+</div>
+                <div class="title"><h1>Chọn môn để kiểm tra</h1></div>
+                <div class="select">
+                    @Html.DropDownList("SubjectId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+
+                    <div class="btnn"><button>Kiểm tra</button></div>
+                </div>
+                <div><h5>Thông tin bài kiểm tra:</h5></div>
+                <div>
+                    <ul>
+                        <!-- <li>Bài thi môn Toán bao gồm 50 câu. Thời gian làm bài: 90 phút</li>
+                <li>Bài thi môn Anh bao gồm 50 câu. Thời gian làm bài: 60 phút</li>
+                <li>Bài thi các môn thuộc tổ hợp KHTN và KHXH bao gồm 40 câu. Thời gian làm bài: 50 phút</li> -->
+                        <li>Tất cả các bài thi sẽ có cấu trúc tương tự đề thi tốt nghiệp THPT Quốc Gia.</li>
+                        <li>Các câu hỏi sẽ được sắp xếp từ dễ đến khó theo dạng kiến thức (70% nhận biết & thông hiểu , 20% vận dụng, 10% vận dụng cao).</li>
+                        <li>
+                            Chú thích:
+                            <table>
+                                <tr>
+                                    <th>Môn học</th>
+                                    <th>Số câu hỏi</th>
+                                    <th>Thời gian</th>
+                                </tr>
+                                <tr>
+                                    <td>Toán</td>
+                                    <td>50</td>
+                                    <td>90</td>
+                                </tr>
+                                <tr>
+                                    <td>Anh</td>
+                                    <td>50</td>
+                                    <td>60</td>
+                                </tr>
+                                <tr>
+                                    <td>KHTN & KHXH</td>
+                                    <td>40</td>
+                                    <td>50</td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>}
+            </div>
+    </div>
+</div>
+   
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
